@@ -374,9 +374,6 @@ void SetDebugPrivA()
 	};
 }
 
-#include <Windows.h> 
-#include <iostream> 
-#include <string> 
 using namespace std;
 
 DWORD_PTR _scan_string(HANDLE hProcHandle, const wchar_t* pwszInput)
