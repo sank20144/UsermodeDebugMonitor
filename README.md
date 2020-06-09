@@ -1,8 +1,6 @@
 # UsermodeDebugMonitor
 
-The application is currently designed to protect itself from debugging. 
-In further iterations, the ability to monitor another application for debugging will be added.
-This would be in the form of an injectable dll or manually adding a TLS callback to the desired application to call the antidebug module. 
+The application is currently designed to protect itself from debugging using TLS Callbacks. The main application logic would be able to continue after that. The code is a mess but in further iterations the code will take a more modular approach. A separate library which can be introduced into new projects using either at runtime or compile time will be developed. 
 
 # References
 
