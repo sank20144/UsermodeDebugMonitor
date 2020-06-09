@@ -1,6 +1,6 @@
 # UsermodeDebugMonitor
 
-The application is currently designed to protect itself from debugging using TLS Callbacks. The main application logic would be able to continue after that. The code is a mess but in further iterations the code will take a more modular approach. A separate library which can be introduced into new projects using either at runtime or compile time will be developed. 
+The application is currently designed to protect itself from debugging using TLS Callbacks. The main application logic would be able to continue after that. The code is a mess but in further iterations the code will take a more modular approach. A separate library which can be introduced into new projects either at runtime or compile time will be developed. 
 
 # References
 
