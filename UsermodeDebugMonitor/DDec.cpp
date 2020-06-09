@@ -51,6 +51,10 @@
 
 
 #pragma comment(lib, "shlwapi.lib")
+#pragma comment (lib, "Mpr.lib")
+#pragma comment( lib, "psapi.lib" )
+#pragma comment( lib, "winmm.lib" )
+
 #pragma warning(disable : 4996)
 #define JUNK_CODE_ONE        \
     __asm{push eax}            \
@@ -132,6 +136,7 @@ int WINAPI GetWindowText(
 	_In_  int    nMaxCount
 );
 
+#define TH32CS_SNAPPROCESS 2
 
 void GetProcId(const char* ProcName)
 {
@@ -374,6 +379,9 @@ void SetDebugPrivA()
 	};
 }
 
+#include <Windows.h> 
+#include <iostream> 
+#include <string> 
 using namespace std;
 
 DWORD_PTR _scan_string(HANDLE hProcHandle, const wchar_t* pwszInput)
@@ -1831,7 +1839,7 @@ void AntiDebug()
 			if (isdbg)
 			{
 				
-				exit(1);
+				exit(111);
 			}
 			PVOID pPeb = GetPEB();
 			PVOID pPeb64 = GetPEB64();
@@ -1841,7 +1849,7 @@ void AntiDebug()
 			if (NtGlobalFlag & NT_GLOBAL_FLAG_DEBUGGED)
 			{
 				
-				exit(1);
+				exit(2);
 			}
 			if (pPeb64)
 			{
@@ -1849,18 +1857,18 @@ void AntiDebug()
 				if (NtGlobalFlagWow64 & NT_GLOBAL_FLAG_DEBUGGED)
 				{
 					
-					exit(1);
+					exit(3);
 				}
 			}
 			if (IsDebuggerPresent())
 			{
 				
-				exit(1);
+				exit(4);
 			}
 			if (DebuggerDriversPresent())
 			{
 				
-				exit(1);
+				exit(5);
 			}
 			PBYTE pImageBase = (PBYTE)GetModuleHandle(NULL);
 			PIMAGE_NT_HEADERS pImageNtHeaders = GetImageNtHeaders(pImageBase);
@@ -1869,7 +1877,7 @@ void AntiDebug()
 			if (pImageLoadConfigDirectory->GlobalFlagsClear != 0)
 			{
 				
-				exit(1);
+				exit(6);
 			}
 			ClasseCheckWindow();
 			__asm
@@ -1900,36 +1908,36 @@ void AntiDebug()
 			if ((time2 - time1) > 100)
 			{
 				
-				exit(1);
+				exit(7);
 			}
 			if (IsitaSandBox() == true)
 			{
 				
-				exit(1);
+				exit(8);
 			}
 			HWND snd;
 
 			if ((snd = FindWindow("SandboxieControlWndClass", NULL))) {
 				
-				exit(1);
+				exit(9);
 			}
 			if ((snd = FindWindow("Afx:400000:0", NULL))) {
 				
-				exit(1);
+				exit(10);
 			}
 			if ((snd = FindWindow("The Wireshark Network Analyzer", NULL))) {
 				
-				exit(1);
+				exit(11);
 			}
 			if ((snd = FindWindow("WPE PRO", NULL))) {
 				
-				exit(1);
+				exit(12);
 			}
 			//method 1
 			HKEY HK = 0;
 			if (RegOpenKeyEx(HKEY_LOCAL_MACHINE, "HARDWARE\\ACPI\\DSDT\\VBOX__", 0, KEY_READ, &HK) == ERROR_SUCCESS)
 			{
-				exit(1);
+				exit(13);
 			}
 			HK = 0;
 			const char* subkey = "SYSTEM\\CurrentControlSet\\Enum\\IDE";
@@ -1967,7 +1975,7 @@ void AntiDebug()
 												if (strstr((char*)ValName, "vbox"))
 												{
 													
-													exit(1);
+													exit(14);
 												}
 											}
 											RegCloseKey(HKKK);
@@ -1997,7 +2005,7 @@ void AntiDebug()
 						if (strstr(systembiosversion, "vbox"))
 						{
 							
-							exit(1);
+							exit(15);
 						}
 					}
 				}
@@ -2017,7 +2025,7 @@ void AntiDebug()
 							if (strstr(video, "oracle") || strstr(video, "virtualbox"))
 							{
 								
-								exit(1);
+								exit(16);
 							}
 							video = &video[strlen(video) + 1];
 						}
@@ -2030,12 +2038,12 @@ void AntiDebug()
 			if (DebugObjectCheck())
 			{
 				
-				exit(1);
+				exit(17);
 			}
 			if (IsDbgPresentPrefixCheck())
 			{
 				
-				exit(1);
+				exit(18);
 			}
 			unsigned long pnsize = 0x1000;
 			char* provider = (char*)LocalAlloc(LMEM_ZEROINIT, pnsize);
@@ -2046,7 +2054,7 @@ void AntiDebug()
 				DWORD ClientAddress;
 				if (lstrcmpi(provider, "VirtualBox Shared Folders") == 0)
 				{
-					exit(1);
+					exit(19);
 				}
 			}
 			
@@ -2061,7 +2069,7 @@ void AntiDebug()
 			if (vpc)
 			{
 				
-				exit(1);
+				exit(20);
 			}
 			else
 			{
@@ -2168,7 +2176,7 @@ long GetFileSize(std::string filename)
 }
 
 int CurNumb = 0;
-void CheckMoudles()
+void CheckModules()
 {
 
 	DWORD aProcesses[1024];
@@ -2591,13 +2599,13 @@ void openFile()
 
 }
 
-
-int main(int argc, char* argv[])
-{
+static auto WINAPI init(const LPVOID instance) -> DWORD {
 	SetDebugPrivA();
 
 	HANDLE hProc = OpenProcess(PROCESS_ALL_ACCESS, FALSE, GetCurrentProcessId());
+
 	ProtectProcess(hProc);
+
 	SetPriorityClass(hProc, ABOVE_NORMAL_PRIORITY_CLASS);
 	CloseHandle(hProc);
 
@@ -2607,5 +2615,91 @@ int main(int argc, char* argv[])
 		CheckAdmin();
 		AntiDebug();
 	}
+}
+
+int main()
+{
+	/*SetDebugPrivA();
+
+	HANDLE hProc = OpenProcess(PROCESS_ALL_ACCESS, FALSE, GetCurrentProcessId());
+
+	ProtectProcess(hProc);
+	
+	SetPriorityClass(hProc, ABOVE_NORMAL_PRIORITY_CLASS);
+	CloseHandle(hProc);
+	
+	// Main Loop
+	while (1)
+	{
+		CheckAdmin();
+		AntiDebug();
+	}*/
+
+	while (1) {
+		Sleep(10);
+	}
+
 	return 0;
 }
+
+/////////////////////////////// SETUP FOR TLS CALLBACK //////////////////////////////////////////
+
+void NTAPI tls_callback(PVOID DllHandle, DWORD dwReason, PVOID)
+{
+	if (dwReason == DLL_PROCESS_ATTACH)
+	{
+		CreateThread(nullptr, 0, init, DllHandle, 0, nullptr);
+	}
+	
+}
+
+#ifdef _WIN64
+#pragma comment (linker, "/INCLUDE:_tls_used")  
+#pragma comment (linker, "/INCLUDE:tls_callback_func")  
+#else
+#pragma comment (linker, "/INCLUDE:__tls_used") 
+#pragma comment (linker, "/INCLUDE:_tls_callback_func")  
+#endif
+
+
+#ifdef _WIN64
+#pragma const_seg(".CRT$XLF")
+EXTERN_C const
+#else
+#pragma data_seg(".CRT$XLF")
+EXTERN_C
+#endif
+PIMAGE_TLS_CALLBACK tls_callback_func = tls_callback;
+#ifdef _WIN64
+#pragma const_seg()
+#else
+#pragma data_seg()
+#endif //_WIN64
+
+/////////////////////////////// END TLS CALLBACK //////////////////////////////////////////
+
+/* /////////////////////////////// SETUP FOR DLL //////////////////////////////////////////
+
+static auto WINAPI thread_entry(const LPVOID instance) -> DWORD
+{
+	init();
+	return 0;
+}
+
+BOOL WINAPI DllMain(
+	_In_ HINSTANCE hinstDLL,
+	_In_ DWORD     fdwReason,
+	_In_ LPVOID    lpvReserved
+) {
+
+	if (fdwReason == DLL_PROCESS_ATTACH)
+	{
+		// Manual mappers sometimes pass nullptr here
+		if (hinstDLL)
+			DisableThreadLibraryCalls(hinstDLL);
+		CreateThread(nullptr, 0, thread_entry, hinstDLL, 0, nullptr);
+	}
+
+	return TRUE;
+}
+/////////////////////////////// END DLL ////////////////////////////////////////// */

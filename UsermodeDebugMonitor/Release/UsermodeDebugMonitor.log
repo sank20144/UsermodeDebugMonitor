@@ -1,0 +1,28 @@
+﻿  DDec.cpp
+C:\Users\user\source\repos\UsermodeDebugMonitor\UsermodeDebugMonitor\DDec.cpp(136,2): warning C4273:  'GetWindowTextA': inconsistent dll linkage
+D:\Windows Kits\10\Include\10.0.18362.0\um\winuser.h(8915,1): message :  see previous definition of 'GetWindowTextA'
+C:\Users\user\source\repos\UsermodeDebugMonitor\UsermodeDebugMonitor\DDec.cpp(139,1): warning C4005:  'TH32CS_SNAPPROCESS': macro redefinition
+D:\Windows Kits\10\Include\10.0.18362.0\um\TlHelp32.h(55): message :  see previous definition of 'TH32CS_SNAPPROCESS'
+C:\Users\user\source\repos\UsermodeDebugMonitor\UsermodeDebugMonitor\DDec.cpp(506,20): warning C4018:  '<': signed/unsigned mismatch
+C:\Users\user\source\repos\UsermodeDebugMonitor\UsermodeDebugMonitor\DDec.cpp(593,22): warning C4018:  '<': signed/unsigned mismatch
+C:\Users\user\source\repos\UsermodeDebugMonitor\UsermodeDebugMonitor\DDec.cpp(657,19): warning C4566:  character represented by universal-character-name '\u2302' cannot be represented in the current code page (1252)
+C:\Users\user\source\repos\UsermodeDebugMonitor\UsermodeDebugMonitor\DDec.cpp(658,19): warning C4566:  character represented by universal-character-name '\u2302' cannot be represented in the current code page (1252)
+C:\Users\user\source\repos\UsermodeDebugMonitor\UsermodeDebugMonitor\DDec.cpp(659,19): warning C4566:  character represented by universal-character-name '\u2302' cannot be represented in the current code page (1252)
+C:\Users\user\source\repos\UsermodeDebugMonitor\UsermodeDebugMonitor\DDec.cpp(717,10): warning C4101:  'WinClasse': unreferenced local variable
+C:\Users\user\source\repos\UsermodeDebugMonitor\UsermodeDebugMonitor\DDec.cpp(716,11): warning C4101:  'filename': unreferenced local variable
+C:\Users\user\source\repos\UsermodeDebugMonitor\UsermodeDebugMonitor\DDec.cpp(1531): warning C4409:  illegal instruction size
+C:\Users\user\source\repos\UsermodeDebugMonitor\UsermodeDebugMonitor\DDec.cpp(1575): warning C4409:  illegal instruction size
+C:\Users\user\source\repos\UsermodeDebugMonitor\UsermodeDebugMonitor\DDec.cpp(2054,11): warning C4101:  'ClientAddress': unreferenced local variable
+C:\Users\user\source\repos\UsermodeDebugMonitor\UsermodeDebugMonitor\DDec.cpp(2317,18): warning C4838:  conversion from 'int' to 'CHAR' requires a narrowing conversion
+C:\Users\user\source\repos\UsermodeDebugMonitor\UsermodeDebugMonitor\DDec.cpp(2317,18): warning C4309:  'initializing': truncation of constant value
+C:\Users\user\source\repos\UsermodeDebugMonitor\UsermodeDebugMonitor\DDec.cpp(2453,25): warning C4244:  'initializing': conversion from 'LONG' to 'float', possible loss of data
+C:\Users\user\source\repos\UsermodeDebugMonitor\UsermodeDebugMonitor\DDec.cpp(2454,25): warning C4244:  'initializing': conversion from 'LONG' to 'float', possible loss of data
+C:\Users\user\source\repos\UsermodeDebugMonitor\UsermodeDebugMonitor\DDec.cpp(2465,25): warning C4244:  'initializing': conversion from 'LONG' to 'float', possible loss of data
+C:\Users\user\source\repos\UsermodeDebugMonitor\UsermodeDebugMonitor\DDec.cpp(2466,25): warning C4244:  'initializing': conversion from 'LONG' to 'float', possible loss of data
+C:\Users\user\source\repos\UsermodeDebugMonitor\UsermodeDebugMonitor\DDec.cpp(2589,14): warning C4244:  'initializing': conversion from 'std::streamoff' to 'int', possible loss of data
+  Generating code
+  2 of 172 functions ( 1.2%) were compiled, the rest were copied from previous compilation.
+    0 functions were new in current compilation
+    1 functions had inline decision re-evaluated but remain unchanged
+  Finished generating code
+  UsermodeDebugMonitor.vcxproj -> C:\Users\user\source\repos\UsermodeDebugMonitor\Release\UsermodeDebugMonitor.exe
